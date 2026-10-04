@@ -1,331 +1,112 @@
-    @keyframes floatUp {
-        0% { transform: translateY(105vh) rotate(-45deg) scale(0.5); opacity: 0; }
-        20% { opacity: 0.7; }
-        80% { opacity: 0.7; }
-        100% { transform: translateY(-10vh) rotate(-45deg) scale(1.3); opacity: 0; }
-    }
-
-    /* Page transition smoothness */
-    .page-section {
-        display: none;
-        opacity: 0;
-        transition: opacity 0.5s ease-in-out;
-    }
-    .page-section.active {
-        display: block;
-        opacity: 1;
-    }
-
-    /* Custom scrollbar */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-thumb { background: #fb7185; border-radius: 10px; }
-</style>
-
-
-<!-- Background Floating Hearts Container -->
-<div id="particles-container" class="absolute inset-0 overflow-hidden z-0 pointer-events-none"></div>
-
-<!-- Floating Background Music & Toggle Widget -->
-<div class="fixed top-5 right-5 z-50 flex items-center gap-3 bg-white/80 backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-rose-200">
-    <span class="text-xs font-medium text-rose-600 hidden sm:inline animate-pulse">🎵 Our Song</span>
-    <button onclick="toggleMusic()" id="music-btn" class="bg-rose-500 hover:bg-rose-600 text-white w-8 h-8 rounded-full flex items-center justify-center transition shadow-sm cursor-pointer">
-        ▶
-    </button>
-    <audio id="bg-music" loop>
-        <source src="https://assets.mixkit.co/music/preview/mixkit-romantic-piano-slow-ambient-438.mp3" type="audio/mp3">
-    </audio>
-</div>
-
-<!-- Top Navigation Header (Multi-page switcher) -->
-<header class="relative z-40 max-w-4xl mx-auto px-4 pt-6 w-full flex items-center justify-between">
-    <div class="flex items-center gap-2 bg-white/80 backdrop-blur-md px-4 py-2 rounded-full border border-rose-200 shadow-sm">
-        <span class="text-rose-500 text-lg">❤️</span>
-        <span class="serif-font font-bold text-slate-800 tracking-wide text-sm sm:text-base">For My Love</span>
-    </div>
-    <nav class="hidden sm:flex items-center gap-2 bg-white/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-rose-200 shadow-sm">
-        <button onclick="switchPage('home')" class="nav-link px-3 py-1 rounded-full text-xs font-semibold text-rose-600 bg-rose-50 transition cursor-pointer" data-target="home">Home</button>
-        <button onclick="switchPage('story')" class="nav-link px-3 py-1 rounded-full text-xs font-semibold text-slate-600 hover:text-rose-600 transition cursor-pointer" data-target="story">Our Story</button>
-        <button onclick="switchPage('gallery')" class="nav-link px-3 py-1 rounded-full text-xs font-semibold text-slate-600 hover:text-rose-600 transition cursor-pointer" data-target="gallery">Memories</button>
-        <button onclick="switchPage('quiz')" class="nav-link px-3 py-1 rounded-full text-xs font-semibold text-slate-600 hover:text-rose-600 transition cursor-pointer" data-target="quiz">Love Quiz</button>
-        <button onclick="switchPage('proposal')" class="nav-link px-3 py-1 rounded-full text-xs font-semibold text-slate-600 hover:text-rose-600 transition cursor-pointer" data-target="proposal">The Question</button>
-    </nav>
-</header>
-
-<!-- Main Content Container -->
-<main class="relative z-10 max-w-3xl w-full mx-auto px-4 py-8 my-auto">
-
-    <!-- PAGE 1: HOME / WELCOME -->
-    <section id="page-home" class="page-section active text-center bg-white/85 backdrop-blur-xl border border-rose-200 shadow-2xl rounded-3xl p-8 sm:p-12">
-        <div class="relative w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden border-4 border-rose-300 shadow-xl group">
-            <img src="Screenshot 2026-10-04 235024.png" alt="Welcome Photo" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500" onerror="this.src='https://placehold.co/300x300/fecdd3/e11d48?text=❤️';">
-        </div>
-        <span class="bg-rose-100 text-rose-600 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3 inline-block">Welcome to our world</span>
-        <h1 class="serif-font text-3xl sm:text-5xl font-bold text-slate-800 mb-4">
-            Hey <span class="text-rose-600">My Love</span>, I made this for you ✨
-        </h1>
-        <p class="text-slate-600 text-sm sm:text-base max-w-lg mx-auto mb-8 leading-relaxed">
-            Step inside to explore our little journey together, sweet memories, and a question that’s been living in my heart for a long time.
-        </p>
-        <button onclick="switchPage('story')" class="bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white font-semibold px-8 py-3.5 rounded-full shadow-lg shadow-rose-500/30 transition transform hover:scale-105 cursor-pointer">
-            Begin Journey ➔
-        </button>
-    </section>
-
-    <!-- PAGE 2: OUR STORY / CHAPTERS -->
-    <section id="page-story" class="page-section bg-white/85 backdrop-blur-xl border border-rose-200 shadow-2xl rounded-3xl p-6 sm:p-10">
-        <div class="text-center mb-6">
-            <span class="text-rose-500 font-bold text-xs uppercase tracking-widest">Chapters of Us</span>
-            <h2 class="serif-font text-3xl font-bold text-slate-800 mt-1">Our Love Story</h2>
-        </div>
-        <div class="mb-6 rounded-2xl overflow-hidden h-44 shadow-md border border-rose-100">
-            <img src="Screenshot 2026-10-04 235032.png" alt="Our Story Chapter" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x200/fecdd3/e11d48?text=Our+Story';">
-        </div>
-        <div class="space-y-6 relative border-l-2 border-rose-200 ml-4 sm:ml-8 pl-6">
-            <div class="relative">
-                <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-rose-500 border-4 border-white shadow-sm"></span>
-                <span class="text-xs font-bold text-rose-600 bg-rose-50 px-2.5 py-0.5 rounded-full">Chapter I</span>
-                <h3 class="font-bold text-slate-800 text-lg mt-1">The Day We Met</h3>
-                <p class="text-slate-600 text-sm mt-1">A simple hello turned into the most meaningful connection of my life. You changed everything effortlessly.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for my tunna</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <ul class='slider'>
+          <!-- Item 1 -->
+          <li class='item' style="background-image: url('Screenshot 2026-10-04 235024.png')">
+            <div class='content'>
+              <h2 class='title'>Project: for my tunna</h2>
+              <p class='description'>A simple website for a completely extraordinary person.</p>
+              <button>Read More</button>
             </div>
-            <div class="relative">
-                <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-rose-500 border-4 border-white shadow-sm"></span>
-                <span class="text-xs font-bold text-rose-600 bg-rose-50 px-2.5 py-0.5 rounded-full">Chapter II</span>
-                <h3 class="font-bold text-slate-800 text-lg mt-1">Falling for You</h3>
-                <p class="text-slate-600 text-sm mt-1">Your laugh, your kindness, and the way you look at things made me fall completely and hopelessly for you.</p>
+          </li>
+          
+          <!-- Item 2 -->
+          <li class='item' style="background-image: url('Screenshot 2026-10-04 235032.png')">
+            <div class='content'>
+              <h2 class='title'>Estrange Bond</h2>
+              <p class='description'>"They told me to practice my coding, so I decided to build something actually worth looking at."</p>
+              <button>Read More</button>
             </div>
-            <div class="relative">
-                <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-rose-500 border-4 border-white shadow-sm"></span>
-                <span class="text-xs font-bold text-rose-600 bg-rose-50 px-2.5 py-0.5 rounded-full">Chapter III</span>
-                <h3 class="font-bold text-slate-800 text-lg mt-1">Today & Forever</h3>
-                <p class="text-slate-600 text-sm mt-1">Every second with you is a gift, and I want to spend all my tomorrows making you smile.</p>
+          </li>
+          
+          <!-- Item 3 -->
+          <li class='item' style="background-image: url('Screenshot 2026-10-04 235042.png')">
+            <div class='content'>
+              <h2 class='title'>"Magnetic Word"</h2>
+              <p class='description'>"Because a simple text message just didn't feel extra enough for you."</p>
+              <button>Read More</button>
             </div>
-        </div>
-        <div class="mt-8 text-center">
-            <button onclick="switchPage('gallery')" class="bg-rose-500 hover:bg-rose-600 text-white font-semibold px-6 py-2.5 rounded-full shadow-md text-sm transition cursor-pointer">
-                View Memories ➔
-            </button>
-        </div>
-    </section>
-
-    <!-- PAGE 3: MEMORIES GALLERY -->
-    <section id="page-gallery" class="page-section bg-white/85 backdrop-blur-xl border border-rose-200 shadow-2xl rounded-3xl p-6 sm:p-10">
-        <div class="text-center mb-8">
-            <span class="text-rose-500 font-bold text-xs uppercase tracking-widest">Precious Moments</span>
-            <h2 class="serif-font text-3xl font-bold text-slate-800 mt-1">Our Favorite Memories</h2>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-            <div class="rounded-2xl overflow-hidden shadow-md border border-rose-100 group relative">
-                <img src="Screenshot 2026-10-04 235042.png" alt="Memory 1" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/400x300/fecdd3/e11d48?text=Memory+1';">
-                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent p-3 text-white text-xs">Unforgettable smiles ✨</div>
+          </li>
+          
+          <!-- Item 4 -->
+          <li class='item' style="background-image: url('Screenshot 2026-10-04 235050.png')">
+            <div class='content'>
+              <h2 class='title'>"Last Trace Of Us"</h2>
+              <p class='description'>No pen, no paper...but, you still draw my attention.</p>
+              <button>Read More</button>
             </div>
-            <div class="rounded-2xl overflow-hidden shadow-md border border-rose-100 group relative">
-                <img src="Screenshot 2026-10-04 235050.png" alt="Memory 2" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/400x300/fecdd3/e11d48?text=Memory+2';">
-                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent p-3 text-white text-xs">Endless late-night talks 🌙</div>
+          </li>
+          
+          <!-- Item 5 -->
+          <li class='item' style="background-image: url('Screenshot 2026-10-04 235102.png')">
+            <div class='content'>
+              <h2 class='title'>"Strings of Sweetness"</h2>
+              <p class='description'>"Just a little reminder of how much brighter things get whenever you're around."</p>
+              <button>Read More</button>
             </div>
-            <div class="rounded-2xl overflow-hidden shadow-md border border-rose-100 group relative">
-                <img src="Screenshot 2026-10-04 235102.png" alt="Memory 3" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/400x300/fecdd3/e11d48?text=Memory+3';">
-                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent p-3 text-white text-xs">My safe place 💖</div>
+          </li>
+          
+          <!-- Item 6 -->
+          <li class='item' style="background-image: url('Screenshot 2026-10-04 235111.png')">
+            <div class='content'>
+              <h2 class='title'>"Breathless Beginnings"</h2>
+              <p class='description'>"Because someone as wonderful as you deserves a little more than just a standard compliment."</p>
+              <button>Read More</button>
             </div>
-        </div>
-        <div class="text-center">
-            <button onclick="switchPage('quiz')" class="bg-rose-500 hover:bg-rose-600 text-white font-semibold px-6 py-2.5 rounded-full shadow-md text-sm transition cursor-pointer">
-                Take Love Quiz ➔
-            </button>
-        </div>
-    </section>
-
-    <!-- PAGE 4: LOVE QUIZ -->
-    <section id="page-quiz" class="page-section bg-white/85 backdrop-blur-xl border border-rose-200 shadow-2xl rounded-3xl p-6 sm:p-10 text-center">
-        <span class="text-rose-500 font-bold text-xs uppercase tracking-widest">Just for Fun</span>
-        <h2 class="serif-font text-3xl font-bold text-slate-800 mt-1 mb-6">How well do you know us?</h2>
-        
-        <div class="w-32 h-32 mx-auto mb-6 rounded-2xl overflow-hidden shadow-md border-2 border-rose-200">
-            <img src="Screenshot 2026-10-04 235111.png" alt="Quiz Photo" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/300x300/fecdd3/e11d48?text=Quiz';">
-        </div>
-
-        <div id="quiz-box" class="bg-rose-50/60 p-6 rounded-2xl border border-rose-100 mb-6">
-            <p id="quiz-question" class="font-semibold text-slate-800 text-base mb-4">Who loves whom more?</p>
-            <div id="quiz-options" class="flex flex-col gap-3 max-w-xs mx-auto">
-                <button onclick="answerQuiz(true)" class="bg-white hover:bg-rose-500 hover:text-white border border-rose-200 py-2.5 px-4 rounded-xl font-medium text-sm transition shadow-sm cursor-pointer">You do! ❤️</button>
-                <button onclick="answerQuiz(true)" class="bg-white hover:bg-rose-500 hover:text-white border border-rose-200 py-2.5 px-4 rounded-xl font-medium text-sm transition shadow-sm cursor-pointer">Definitely You! ✨</button>
+          </li>
+          
+          <!-- Item 7 -->
+          <li class='item' style="background-image: url('Screenshot 2026-10-04 235125.png')">
+            <div class='content'>
+              <h2 class='title'>"Centered On You"</h2>
+              <p class='description'>"Just a few thoughts about my favorite human."</p>
+              <button>Read More</button>
             </div>
-        </div>
-        <div id="quiz-result" class="hidden text-rose-600 font-semibold mb-6">Correct! We are equally crazy in love! 🥰</div>
-        <button onclick="switchPage('proposal')" class="bg-gradient-to-r from-rose-500 to-pink-500 text-white font-semibold px-8 py-3 rounded-full shadow-lg text-sm transition transform hover:scale-105 cursor-pointer">
-            Proceed to The Final Question 💖
-        </button>
-    </section>
-
-    <!-- PAGE 5: THE GRAND PROPOSAL -->
-    <section id="page-proposal" class="page-section text-center bg-white/85 backdrop-blur-xl border border-rose-200 shadow-2xl rounded-3xl p-8 sm:p-12">
-        <div class="relative w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-rose-300 shadow-xl">
-            <img src="Screenshot 2026-10-04 235125.png" alt="Proposal Image" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/300x300/fecdd3/e11d48?text=Proposal';">
-        </div>
-        <h1 class="serif-font text-3xl sm:text-4xl font-bold text-slate-800 mb-3">
-            Will you be my forever? 💍❤️
-        </h1>
-        <p class="text-slate-600 text-sm sm:text-base max-w-md mx-auto mb-8 leading-relaxed">
-            You make my life complete in every possible way. Say yes and let’s write our forever together. ✨
-        </p>
-
-        <!-- Hidden extra shots ready for success state or background decoration -->
-        <div class="hidden">
-            <img src="Screenshot 2026-10-04 235135.png" alt="Extra 1">
-            <img src="Screenshot 2026-10-04 235145.png" alt="Extra 2">
-            <img src="Screenshot 2026-10-04 235156.png" alt="Extra 3">
-        </div>
-
-        <!-- Interactive Buttons Container -->
-        <div id="button-container" class="flex items-center justify-center gap-6 relative min-h-[70px]">
-            <button id="yes-btn" onclick="handleYesClick()" class="bg-gradient-to-r from-rose-500 to-red-500 hover:from-rose-600 hover:to-red-600 text-white font-semibold text-lg px-8 py-3.5 rounded-full shadow-lg shadow-rose-500/30 transform hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer z-20">
-                Yes! 💖
-            </button>
-            <button id="no-btn" onmouseover="teleportNoButton()" onclick="teleportNoButton()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold text-lg px-8 py-3.5 rounded-full shadow-md transition-all duration-200 cursor-pointer absolute right-4 sm:right-16">
-                No 🙈
-            </button>
-        </div>
-    </section>
-
-</main>
-
-<!-- Mobile Nav Bar (Bottom for easy reach) -->
-<nav class="sm:hidden relative z-40 bg-white/90 backdrop-blur-md border-t border-rose-200 py-3 px-4 flex justify-around shadow-lg">
-    <button onclick="switchPage('home')" class="nav-mobile-btn text-xs font-semibold text-rose-600 cursor-pointer" data-target="home">Home</button>
-    <button onclick="switchPage('story')" class="nav-mobile-btn text-xs font-semibold text-slate-600 cursor-pointer" data-target="story">Story</button>
-    <button onclick="switchPage('gallery')" class="nav-mobile-btn text-xs font-semibold text-slate-600 cursor-pointer" data-target="gallery">Memories</button>
-    <button onclick="switchPage('quiz')" class="nav-mobile-btn text-xs font-semibold text-slate-600 cursor-pointer" data-target="quiz">Quiz</button>
-    <button onclick="switchPage('proposal')" class="nav-mobile-btn text-xs font-semibold text-slate-600 cursor-pointer" data-target="proposal">Ask Me</button>
-</nav>
-
-<!-- Footer Credit -->
-<footer class="py-4 text-center text-slate-500 text-xs z-10">
-    Crafted with boundless love & aesthetic vibes ❤️
-</footer>
-
-<script>
-    // Multi-page navigation switcher handler
-    function switchPage(pageId) {
-        const sections = document.querySelectorAll('.page-section');
-        sections.forEach(sec => sec.classList.remove('active'));
-
-        const targetSection = document.getElementById(`page-${pageId}`);
-        if (targetSection) {
-            targetSection.classList.add('active');
-        }
-
-        // Update desktop & mobile active tab styling
-        document.querySelectorAll('.nav-link, .nav-mobile-btn').forEach(btn => {
-            if (btn.getAttribute('data-target') === pageId) {
-                btn.classList.add('text-rose-600', 'bg-rose-50');
-                btn.classList.remove('text-slate-600');
-            } else {
-                btn.classList.remove('text-rose-600', 'bg-rose-50');
-                btn.classList.add('text-slate-600');
-            }
-        });
-
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // Floating background hearts generator
-    function createHeartParticle() {
-        const container = document.getElementById('particles-container');
-        if (!container) return;
-        const heart = document.createElement('div');
-        heart.classList.add('heart-particle');
-        
-        const size = Math.floor(Math.random() * 18) + 10;
-        heart.style.width = `${size}px`;
-        heart.style.height = `${size}px`;
-        heart.style.left = `${Math.random() * 100}vw`;
-        heart.style.animationDuration = `${Math.random() * 4 + 5}s`;
-        
-        container.appendChild(heart);
-        setTimeout(() => heart.remove(), 8000);
-    }
-    setInterval(createHeartParticle, 450);
-
-    // Music toggle handler
-    let isPlaying = false;
-    function toggleMusic() {
-        const music = document.getElementById('bg-music');
-        const btn = document.getElementById('music-btn');
-        if (isPlaying) {
-            music.pause();
-            btn.innerHTML = '▶';
-            isPlaying = false;
-        } else {
-            music.play().catch(e => console.log("Audio autoplay prevented"));
-            btn.innerHTML = '❚❚';
-            isPlaying = true;
-        }
-    }
-
-    // Love quiz logic
-    function answerQuiz(isCorrect) {
-        document.getElementById('quiz-options').style.display = 'none';
-        document.getElementById('quiz-question').innerText = "You nailed it! 🎉";
-        document.getElementById('quiz-result').classList.remove('hidden');
-    }
-
-    // Teleport escaping 'No' button
-    function teleportNoButton() {
-        const noBtn = document.getElementById('no-btn');
-        const container = document.getElementById('page-proposal');
-        
-        const cardRect = container.getBoundingClientRect();
-        const btnRect = noBtn.getBoundingClientRect();
-
-        const maxX = cardRect.width - btnRect.width - 50;
-        const maxY = 100;
-
-        const randomX = (Math.random() - 0.5) * maxX * 1.6;
-        const randomY = (Math.random() - 0.5) * maxY * 2;
-
-        noBtn.style.position = 'relative';
-        noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
-    }
-
-    // Handle 'Yes' click confetti celebration with final images
-    function handleYesClick() {
-        const duration = 3.5 * 1000;
-        const animationEnd = Date.now() + duration;
-        const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 1000 };
-
-        function randomInRange(min, max) { return Math.random() * (max - min) + min; }
-
-        const interval = setInterval(function() {
-            const timeLeft = animationEnd - Date.now();
-            if (timeLeft <= 0) return clearInterval(interval);
-            const particleCount = 50 * (timeLeft / duration);
-            confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
-            confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
-        }, 250);
-
-        const proposalPage = document.getElementById('page-proposal');
-        proposalPage.innerHTML = `
-            <div class="py-6 animate-fade-in text-center">
-                <div class="flex justify-center items-center gap-3 mb-6">
-                    <div class="w-24 h-24 rounded-full overflow-hidden border-2 border-rose-400 shadow-md">
-                        <img src="Screenshot 2026-10-04 235135.png" alt="Celebration 1" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/200x200/fecdd3/e11d48?text=❤️';">
-                    </div>
-                    <div class="w-28 h-28 rounded-full overflow-hidden border-4 border-rose-400 shadow-xl">
-                        <img src="Screenshot 2026-10-04 235145.png" alt="Celebration 2" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/200x200/fecdd3/e11d48?text=💖';">
-                    </div>
-                    <div class="w-24 h-24 rounded-full overflow-hidden border-2 border-rose-400 shadow-md">
-                        <img src="Screenshot 2026-10-04 235156.png" alt="Celebration 3" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/200x200/fecdd3/e11d48?text=✨';">
-                    </div>
-                </div>
-                <h1 class="serif-font text-3xl sm:text-5xl font-bold text-rose-600 mb-4">
-                    Yay! You made me the happiest person ever! 💖
-                </h1>
-                <p class="text-slate-700 text-base sm:text-lg leading-relaxed mb-6 max-w-md mx-auto">
-                    I can't wait to create countless beautiful memories together! You are my dream come true. ✨🥂
-                </p>
-                <div class="inline-block bg-rose-100 text-rose-700 font-medium px-6 py-3 rounded-full shadow-inner">
-                    Forever & Always yours ❤️
-                </div>
+          </li> 
+          
+          <!-- Item 8 -->
+          <li class='item' style="background-image: url('Screenshot 2026-10-04 235135.png')">
+            <div class='content'>
+              <h2 class='title'>"A Little Space For You"</h2>
+              <p class='description'>"Because you're worth a lot more than just a quick mention."</p>
+              <button>Read More</button>
             </div>
-        `;
-    }
-</script>
+          </li>
+
+          <!-- Item 9 -->
+          <li class='item' style="background-image: url('Screenshot 2026-10-04 235145.png')">
+            <div class='content'>
+              <h2 class='title'>"Quiet Moments"</h2>
+              <p class='description'>"Even silence feels like poetry when I'm sharing it with you."</p>
+              <button>Read More</button>
+            </div>
+          </li>
+
+          <!-- Item 10 -->
+          <li class='item' style="background-image: url('Screenshot 2026-10-04 235156.png')">
+            <div class='content'>
+              <h2 class='title'>"Infinite Loop"</h2>
+              <p class='description'>"My thoughts keep looping back to you, and honestly, I never want to escape."</p>
+              <button>Read More</button>
+            </div>
+          </li>
+        </ul>
+        <nav class='nav'>
+          <ion-icon class='btn prev' name="arrow-back-outline"></ion-icon>
+          <ion-icon class='btn next' name="arrow-forward-outline"></ion-icon>
+        </nav>
+      </main>
+      
+      <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+<script src="script.js"></script>
+</html>
